@@ -33,7 +33,7 @@ bool nightmode;
 
 #define SOUDLIMIT 0.1
 #define BALLMAX 300
-#define NIGHT_START 17
+#define NIGHT_START 18
 #define DAY_START 8
 
 //--------------------------------------------------------------
