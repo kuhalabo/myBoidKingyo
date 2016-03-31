@@ -32,6 +32,11 @@ public:
     vector<Bird> nullBirds;
     
     ofColor bgcolor;
+    ofColor color1;
+    ofColor color2;
+    ofColor color3;
+    ofColor color4;
+    ofColor color5;    
 
     int ballsNum;
     int counterBall;

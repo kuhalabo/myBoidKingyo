@@ -58,39 +58,39 @@ void ofApp::setup()
 
     ballsNum = 7;
     counterBall = 0;
-    // self, enemy, friend1, friend2
-    birds1.reserve(BOID1);
-    for(int i = 0; i < BOID1; i++)
-    {
-        birds1.push_back(*new Bird( &birds1, i, COLOR1n, &birds2, &birds3, &nullBirds));
-    }
-    
-    birds2.reserve(BOID2);
-    for(int i = 0; i < BOID2; i++)
-    {
-        birds2.push_back(*new Bird( &birds2, i, COLOR2n, &nullBirds, &birds3, &nullBirds));
-    }
-    
-    birds3.reserve(BOID3);
-    for(int i = 0; i < BOID3; i++)
-    {
-        birds3.push_back(*new Bird( &nullBirds, i, COLOR3n, &nullBirds, &birds2, &nullBirds));
-    }
-    
-    birds4.reserve(BOID4);
-    for(int i = 0; i < BOID4; i++)
-    {
-        birds4.push_back(*new Bird( &birds4, i, COLOR4n, &birds1, &birds3, &nullBirds));
-    }
-    
-   	soundStream.printDeviceList();
- //   soundStream.setup(this, 0, 1, 44100, 256, 4);
-    soundStream.setup(this, 0, 1, 44100, 128, 4);
     
     hh = ofGetHours();
     setNightMode(hh);
     setColorDayNight();
 
+    // self, enemy, friend1, friend2
+    birds1.reserve(BOID1);
+    for(int i = 0; i < BOID1; i++)
+    {
+        birds1.push_back(*new Bird( &birds1, i, color1, &birds2, &birds3, &nullBirds));
+    }
+    
+    birds2.reserve(BOID2);
+    for(int i = 0; i < BOID2; i++)
+    {
+        birds2.push_back(*new Bird( &birds2, i, color2, &nullBirds, &birds3, &nullBirds));
+    }
+    
+    birds3.reserve(BOID3);
+    for(int i = 0; i < BOID3; i++)
+    {
+        birds3.push_back(*new Bird( &nullBirds, i, color3, &nullBirds, &birds2, &nullBirds));
+    }
+    
+    birds4.reserve(BOID4);
+    for(int i = 0; i < BOID4; i++)
+    {
+        birds4.push_back(*new Bird( &birds4, i, color4, &birds1, &birds3, &nullBirds));
+    }
+    
+   	soundStream.printDeviceList();
+ //   soundStream.setup(this, 0, 1, 44100, 256, 4);
+    soundStream.setup(this, 0, 1, 44100, 128, 4);
 }
 
 //--------------------------------------------------------------
@@ -326,26 +326,13 @@ void ofApp::ballGenerate(ofPoint _pos, float _radius){
     b.pos = _pos;
     if(_radius > 0.9 ) b.radius = _radius;
     int f = ofRandom(1,6);
-    if(nightmode){
-        switch ( f )
-        {
-            case 1: b.bcolor = COLOR1n; b.fish = 1; break;
-            case 2: b.bcolor = COLOR2n; b.fish = 2; break;
-            case 3: b.bcolor = COLOR3n; b.fish = 3; break;
-            case 4: b.bcolor = COLOR4n; b.fish = 4; break;
-            case 5: b.bcolor = COLOR5n; b.fish = 5; break;
-        }
-    }
-    else{
-        switch ( f )
-        {
-            case 1: b.bcolor = COLOR1d; b.fish = 1; break;
-            case 2: b.bcolor = COLOR2d; b.fish = 2; break;
-            case 3: b.bcolor = COLOR3d; b.fish = 3; break;
-            case 4: b.bcolor = COLOR4d; b.fish = 4; break;
-            case 5: b.bcolor = COLOR5d; b.fish = 5; break;
-        }
-        
+    switch ( f )
+    {
+        case 1: b.bcolor = color1; b.fish = 1; break;
+        case 2: b.bcolor = color2; b.fish = 2; break;
+        case 3: b.bcolor = color3; b.fish = 3; break;
+        case 4: b.bcolor = color4; b.fish = 4; break;
+        case 5: b.bcolor = color5; b.fish = 5; break;
     }
     balls.push_back(b);
     counterBall = 0;
@@ -355,67 +342,50 @@ void ofApp::ballGenerate(ofPoint _pos, float _radius){
 void ofApp::setColorDayNight(){
     if( nightmode ){
         bgcolor = BGCOLORn; // Black
-        for(int i = 0; i < BOID1; i++)
-        {
-            birds1[i].circleColor = COLOR1n;
-        }
-        for(int i = 0; i < BOID2; i++)
-        {
-            birds2[i].circleColor = COLOR2n;
-        }
-        for(int i = 0; i < BOID3; i++)
-        {
-            birds3[i].circleColor = COLOR3n;
-        }
-        for(int i = 0; i < BOID4; i++)
-        {
-            birds4[i].circleColor = COLOR4n;
-        }
-
-        for(int i = 0; i < balls.size(); i++)
-        {
-            switch ( balls[i].fish )
-            {
-                case 1: balls[i].bcolor = COLOR1n; break;
-                case 2: balls[i].bcolor = COLOR2n; break;
-                case 3: balls[i].bcolor = COLOR3n; break;
-                case 4: balls[i].bcolor = COLOR4n; break;
-                case 5: balls[i].bcolor = COLOR5n; break;
-            }
-        }
-        
+        color1 = COLOR1n;
+        color2 = COLOR2n;
+        color3 = COLOR3n;
+        color4 = COLOR4n;
+        color5 = COLOR5n;
     }
     else{
         bgcolor = BGCOLORd;
-        for(int i = 0; i < BOID1; i++)
-        {
-            birds1[i].circleColor = COLOR1d;
-        }
-        for(int i = 0; i < BOID2; i++)
-        {
-            birds2[i].circleColor = COLOR2d;
-        }
-        for(int i = 0; i < BOID3; i++)
-        {
-            birds3[i].circleColor = COLOR3d;
-        }
-        for(int i = 0; i < BOID4; i++)
-        {
-            birds4[i].circleColor = COLOR4d;
-        }
-        for(int i = 0; i < balls.size(); i++)
-        {
-            switch ( balls[i].fish )
-            {
-                case 1: balls[i].bcolor = COLOR1d; break;
-                case 2: balls[i].bcolor = COLOR2d; break;
-                case 3: balls[i].bcolor = COLOR3d; break;
-                case 4: balls[i].bcolor = COLOR4d; break;
-                case 5: balls[i].bcolor = COLOR5d; break;
-            }
-        }
-
+        color1 = COLOR1d;
+        color2 = COLOR2d;
+        color3 = COLOR3d;
+        color4 = COLOR4d;
+        color5 = COLOR5d;
     }
+    
+    for(int i = 0; i < birds1.size(); i++)
+    {
+        birds1[i].circleColor = color1;
+    }
+    for(int i = 0; i < birds2.size(); i++)
+    {
+        birds2[i].circleColor = color2;
+    }
+    for(int i = 0; i < birds3.size(); i++)
+    {
+        birds3[i].circleColor = color3;
+    }
+    for(int i = 0; i < birds4.size(); i++)
+    {
+        birds4[i].circleColor = color4;
+    }
+    
+    for(int i = 0; i < balls.size(); i++)
+    {
+        switch ( balls[i].fish )
+        {
+            case 1: balls[i].bcolor = color1; break;
+            case 2: balls[i].bcolor = color2; break;
+            case 3: balls[i].bcolor = color3; break;
+            case 4: balls[i].bcolor = color4; break;
+            case 5: balls[i].bcolor = color5; break;
+        }
+    }
+    
 }
 
 //--------------------------------------------------------------
