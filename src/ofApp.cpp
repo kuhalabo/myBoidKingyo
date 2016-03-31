@@ -9,7 +9,7 @@
 #define BOID4 200
 
 #define BGCOLORn ofColor(0,0,0,32) // black
-#define BGCOLORd ofColor(32,178,170,32); // Emerald Green
+#define BGCOLORd ofColor(32,178,170,50); // Emerald Green
 
 #define COLOR1n ofColor(255,0,0,255) // red
 #define COLOR2n ofColor(0,255,0,255)  // green
@@ -18,9 +18,10 @@
 #define COLOR5n ofColor(255,165,0,255) //orange
 
 #define COLOR1d ofColor(255,0,0,255) // red
+#define COLOR2d ofColor(0,255,95,255)  // light Green
 //#define COLOR2d ofColor(76,103,51,255)  // Ivy Green
-#define COLOR2d ofColor(255,0,255,255)  // mazenta
-#define COLOR3d ofColor(0,0,255) // blue
+//#define COLOR2d ofColor(255,0,255,255)  // mazenta
+#define COLOR3d ofColor(100,0,255) // blue
 #define COLOR4d ofColor(255,255,0,255) // Yellow
 #define COLOR5d ofColor(255,165,0,255) //orange
 
